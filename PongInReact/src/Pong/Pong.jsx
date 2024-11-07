@@ -17,8 +17,9 @@ function Pong() {
     const lastUpdateTimeRef = useRef(0);
     const [count, setCount] = useState(0);
 
+	// Setting the tab on mount
 	useEffect(() => {
-		document.title = "Pong :)"; // Set the tab name here
+		document.title = "Pong";
 	}, []);
 
     // Counter effect for seconds since start
