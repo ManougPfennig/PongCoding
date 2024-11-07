@@ -1,6 +1,6 @@
-For the C screensaver (from inside the PongInC directory) :\n
-	- Command "make"\n
-	- Command "./pong"\n
+For the C screensaver (from inside the PongInC directory) :
+	- Command "make"
+	- Command "./pong"
 
 For the React Pong game (from inside the PongInReact directory) :
 	- Command "npm run dev"
