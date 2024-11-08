@@ -187,7 +187,7 @@ function Pong() {
 		let paddleY = (side == 1 ? RPaddle.current.y : LPaddle.current.y);
 
 		// When at a paddle's x value, checks if the ball y value is inside the paddel's range to allow rebound
-		if (y > paddleY + 60 || y < paddleY - 60)
+		if (y > paddleY + 65 || y < paddleY - 65)
 			return (false);
 		return (true);
 	}
@@ -206,7 +206,7 @@ function Pong() {
     const nextHit = () => {
 
 		// Setting next hit position
-		let newY = vec.current > 0 ? 491 : 9;
+		let newY = vec.current > 0 ? 491.1 : 9.1;
 		let newX = dir.current * ((newY - obj.current.y) / vec.current) + obj.current.x;
 
 		// Checking if the ball is going past a paddle, setting the next position no further than paddle level
@@ -215,15 +215,15 @@ function Pong() {
 			newX = newX > 750 ? 750 : 50;
 			newY = dir.current * (newX - obj.current.x) * vec.current + obj.current.y;
 
-		} // If at paddle level, checking if the ball is going to rebound or score a point
+		} // Or, if at paddle level, checking if the ball is going to rebound or score a point
 		else if (obj.current.x == 750 || obj.current.x == 50)
 		{
-			// If this side's paddle is in range, the ball bounces off
+			// And if this side's paddle is in range, the ball bounces off
 			if (isPaddleAtLevel(dir.current, pos.current.y) == true)
 			{
 				vec.current = getNewVector(dir.current, pos.current.y);
 				dir.current *= -1;
-				newY = vec.current > 0 ? 491.1 : 9;
+				newY = vec.current > 0 ? 491.1 : 9.1;
 				newX = dir.current * ((newY - obj.current.y) / vec.current) + obj.current.x;
 				if (newX >= 750 || newX <= 50) {
 					newX = (newX >= 750 ? 750 : 50);
@@ -233,9 +233,6 @@ function Pong() {
 			}
 			else // Otherwise, the ball goes to score a point
 			{
-				newY = vec.current > 0 ? 491 : 9;
-				newX = dir.current * ((newY - obj.current.y) / vec.current) + obj.current.x;
-
 				if (newX >= 791 || newX <= 9) {
 					newX = (newX >= 791 ? 791.1 : 9);
 					newY = dir.current * (newX - pos.current.x) * vec.current + pos.current.y;
@@ -245,10 +242,15 @@ function Pong() {
 					vec.current *= -1;
 			}
 		}
-		else // Rebound didn't need any specific verification
+		else // Or rebound didn't need any specific verification
 		{
+			console.log("no specific");
 			if (newX >= 750 || newX <= 50) {
-				newX = (newX >= 750 ? 750 : 50);
+				// if (pos.current.x >= 750 || pos.current.x <= 50)
+				if (pos.current.x > 750 || pos.current.x < 50)
+					newX = (newX >= 750 ? 791.1 : 9);
+				else
+					newX = (newX >= 750 ? 750 : 50);
 				newY = dir.current * (newX - pos.current.x) * vec.current + pos.current.y;
 				dir.current *= -1;
 			}
